@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct Characters {
+struct Characters: Decodable {
     let results: [Character]
 }
 
-struct Character {
+struct Character: Decodable {
     let name: String
     let status: String
     let species: String
@@ -21,10 +21,10 @@ struct Character {
     let image: URL
 }
 
-struct Origin {
+struct Origin: Decodable {
     let name: String
 }
 
-struct Location {
+struct Location: Decodable {
     let name: String
 }

@@ -7,7 +7,9 @@
 
 import UIKit
 
-class CharactersViewController: UITableViewController {
+final class CharactersViewController: UITableViewController {
+    
+    var characters: [Character] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
