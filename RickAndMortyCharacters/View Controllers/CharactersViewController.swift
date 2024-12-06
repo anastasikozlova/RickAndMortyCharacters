@@ -19,6 +19,12 @@ final class CharactersViewController: UITableViewController {
         tableView.rowHeight = 100
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let characterDetailsVC = segue.destination as? CharacterDetailsViewController
+        characterDetailsVC?.character = characters[indexPath.row]
+    }
+    
     private func fetchCharacters() {
         networkManager.fetchCharacters(from: networkManager.url) { [weak self] result in
             switch result {
