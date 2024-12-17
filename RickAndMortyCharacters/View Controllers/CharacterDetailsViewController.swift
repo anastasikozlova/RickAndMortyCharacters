@@ -8,7 +8,8 @@
 import UIKit
 
 final class CharacterDetailsViewController: UIViewController {
-
+    
+    // MARK: - IBOutlets
     @IBOutlet var characterImage: UIImageView!
     @IBOutlet var statusLabel: UILabel!
     @IBOutlet var speciesLabel: UILabel!
@@ -16,8 +17,13 @@ final class CharacterDetailsViewController: UIViewController {
     @IBOutlet var originLabel: UILabel!
     @IBOutlet var locationLabel: UILabel!
     
+    // MARK: - Public Properties
     var character: Character!
     
+    // MARK: - Private Properties
+    private var spinnerView = UIActivityIndicatorView()
+    
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,9 +34,13 @@ final class CharacterDetailsViewController: UIViewController {
         originLabel.text = "Origin: \(character.origin.name)"
         locationLabel.text = "Location: \(character.location.name)"
         
+        showSpinner(in: characterImage)
         fetchImage()
+        
+        characterImage.layer.cornerRadius = characterImage.frame.width / 2
     }
     
+    // MARK: - Private Methods
     private func fetchImage() {
         NetworkManager.shared.fetchImage(from: character.image) { [weak self] result in
             switch result {
@@ -40,5 +50,14 @@ final class CharacterDetailsViewController: UIViewController {
                 print(error)
             }
         }
+    }
+    
+    private func showSpinner(in view: UIView) {
+        spinnerView = UIActivityIndicatorView(style: .large)
+        spinnerView.color = .white
+        spinnerView.startAnimating()
+        spinnerView.center = view.center
+        spinnerView.hidesWhenStopped = true
+        view.addSubview(spinnerView)
     }
 }

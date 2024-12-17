@@ -9,22 +9,26 @@ import UIKit
 
 final class CharactersViewController: UITableViewController {
     
+    // MARK: - Private Properties
     private let networkManager = NetworkManager.shared
     private var characters: [Character] = []
     
-
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.rowHeight = 70
+        
         fetchCharacters()
-        tableView.rowHeight = 100
     }
     
+    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
         let characterDetailsVC = segue.destination as? CharacterDetailsViewController
         characterDetailsVC?.character = characters[indexPath.row]
     }
     
+    // MARK: - Private Methods
     private func fetchCharacters() {
         networkManager.fetchCharacters(from: networkManager.url) { [weak self] result in
             switch result {
@@ -40,6 +44,7 @@ final class CharactersViewController: UITableViewController {
 
 }
 
+// MARK: - UITableViewDataSource
 extension CharactersViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         characters.count

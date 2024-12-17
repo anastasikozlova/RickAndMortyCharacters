@@ -14,6 +14,9 @@ final class CharacterCell: UITableViewCell {
     
     func configure(with character: Character) {
         characterName.text = "Name: \(character.name)"
+        characterImage.contentMode = .scaleAspectFit
+        characterImage.clipsToBounds = true
+        characterImage.layer.cornerRadius = characterImage.frame.height / 2
         
         NetworkManager.shared.fetchImage(from: character.image) { [weak self] result in
             switch result {
