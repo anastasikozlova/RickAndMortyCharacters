@@ -11,29 +11,37 @@ final class CharactersViewController: UITableViewController {
     
     // MARK: - Private Properties
     private let networkManager = NetworkManager.shared
-    private var characters: [Character] = []
+    private var rickAndMorty: RickAndMorty?
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.rowHeight = 70
         
-        fetchCharacters()
+        fetchData(from: networkManager.url)
     }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let indexPath = tableView.indexPathForSelectedRow else { return }
+        let character = rickAndMorty?.results[indexPath.row]
         let characterDetailsVC = segue.destination as? CharacterDetailsViewController
-        characterDetailsVC?.character = characters[indexPath.row]
+        characterDetailsVC?.character = character
+    }
+    
+    // MARK: - IB Actions
+    @IBAction func updateData(_ sender: UIBarButtonItem) {
+        sender.tag == 1
+        ? fetchData(from: rickAndMorty?.info.next)
+        : fetchData(from: rickAndMorty?.info.prev)
     }
     
     // MARK: - Private Methods
-    private func fetchCharacters() {
-        networkManager.fetchCharacters(from: networkManager.url) { [weak self] result in
+    private func fetchData(from url: URL?) {
+        networkManager.fetch(RickAndMorty.self, from: url) { [weak self] result in
             switch result {
-            case .success(let characters):
-                self?.characters = characters
+            case .success(let rickAndMorty):
+                self?.rickAndMorty = rickAndMorty
                 self?.tableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -47,13 +55,13 @@ final class CharactersViewController: UITableViewController {
 // MARK: - UITableViewDataSource
 extension CharactersViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        characters.count
+        rickAndMorty?.results.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "characterCell", for: indexPath)
         guard let cell = cell as? CharacterCell else { return UITableViewCell()}
-        let character = characters[indexPath.row]
+        guard let character = rickAndMorty?.results[indexPath.row] else { return UITableViewCell()}
         cell.configure(with: character)
         return cell
     }

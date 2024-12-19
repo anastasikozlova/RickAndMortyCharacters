@@ -7,10 +7,17 @@
 
 import Foundation
 
-struct Characters: Decodable {
+struct RickAndMorty: Decodable {
+    let info: Info
     let results: [Character]
 }
 
+struct Info: Decodable {
+    let pages: Int
+    let next: URL?
+    let prev: URL?
+    
+}
 struct Character: Decodable {
     let name: String
     let status: String
