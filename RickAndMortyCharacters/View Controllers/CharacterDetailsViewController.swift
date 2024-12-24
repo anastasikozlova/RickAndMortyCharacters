@@ -42,7 +42,8 @@ final class CharacterDetailsViewController: UIViewController {
     
     // MARK: - Private Methods
     private func fetchImage() {
-        NetworkManager.shared.fetchImage(from: character.image) { [weak self] result in
+        guard let url = URL(string: character.image) else { return }
+        NetworkManager.shared.fetchImage(from: url) { [weak self] result in
             switch result {
             case .success(let imageData):
                 self?.characterImage.image = UIImage(data: imageData)

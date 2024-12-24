@@ -6,6 +6,23 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		416057E62D15B80900DBAC9F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 416057E52D15B80900DBAC9F /* Alamofire */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		416057DD2D15B12100DBAC9F /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		41B0EB6C2CECEAA600934D63 /* RickAndMortyCharacters.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RickAndMortyCharacters.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -36,16 +53,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				416057E62D15B80900DBAC9F /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		416057DE2D15B15A00DBAC9F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		41B0EB632CECEAA600934D63 = {
 			isa = PBXGroup;
 			children = (
 				41B0EB6E2CECEAA600934D63 /* RickAndMortyCharacters */,
+				416057DE2D15B15A00DBAC9F /* Frameworks */,
 				41B0EB6D2CECEAA600934D63 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,6 +94,7 @@
 				41B0EB682CECEAA600934D63 /* Sources */,
 				41B0EB692CECEAA600934D63 /* Frameworks */,
 				41B0EB6A2CECEAA600934D63 /* Resources */,
+				416057DD2D15B12100DBAC9F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -78,6 +105,7 @@
 			);
 			name = RickAndMortyCharacters;
 			packageProductDependencies = (
+				416057E52D15B80900DBAC9F /* Alamofire */,
 			);
 			productName = RickAndMortyCharacters;
 			productReference = 41B0EB6C2CECEAA600934D63 /* RickAndMortyCharacters.app */;
@@ -107,6 +135,9 @@
 			);
 			mainGroup = 41B0EB632CECEAA600934D63;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				416057E42D15B80900DBAC9F /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 41B0EB6D2CECEAA600934D63 /* Products */;
 			projectDirPath = "";
@@ -341,6 +372,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		416057E42D15B80900DBAC9F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = exactVersion;
+				version = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		416057E52D15B80900DBAC9F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 416057E42D15B80900DBAC9F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 41B0EB642CECEAA600934D63 /* Project object */;
 }
